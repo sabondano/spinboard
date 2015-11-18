@@ -1,31 +1,44 @@
 <h1>Welcome to Spinboard</h1>
 <h2>All Links</h2>
+
 <% if @links.empty? %>
   <p>You haven't submitted any links yet.</p>
 <% else %>
-  <table>
+  <button id="btn-show-all">Show All</button>
+  <button id="btn-show-read">Show Read Only</button>
+  <button id="btn-show-unread">Show Unread Only</button>
+
+  <br>
+  <br>
+
+  <%= label_tag :q, :search, class: "control-label" %>
+  <%= text_field_tag :q, "", class: "form-control" %>
+
+  <table id="links">
     <tr>
       <th>Title</th>
       <th>URL</th>
       <th>Read</th>
       <th></th>
+      <th></th>
     </tr>
     <% @links.each do |link| %>
-      <tr>
-        <td class="read-<%= link.read %>"><%= link.title %></td>
+      <tr class="link link-read-<%= link.read %>">
+        <td class="title read-<%= link.read %>"><%= link.title %></td>
         <td class="read-<%= link.read %>"><a href="<%= link.url %>"><%= link.url %></td>
         <td><%= link.read %></td>
         <td>
           <% if !link.read %> 
-                 <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: true}}), method: :patch do %>
-                 <%= submit_tag 'Mark as Read' %>
-               <% end %>
-             <% else %>
-                 <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: false}}), method: :patch do %>
-                 <%= submit_tag 'Mark as Unread' %>
-               <% end %>
-           <% end %>
+            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: true}}), method: :patch do %>
+              <%= submit_tag 'Mark as Read' %>
+            <% end %>
+          <% else %>
+            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: false}}), method: :patch do %>
+              <%= submit_tag 'Mark as Unread' %>
+            <% end %>
+          <% end %>
         </td>
+        <td><%= link_to 'edit', edit_link_path(link.id) %></td>
 
       </tr>
     <% end %>
