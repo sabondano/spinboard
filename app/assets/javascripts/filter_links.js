@@ -1,6 +1,7 @@
 $(document).on('ready page:load', function () {
   searchLinks();
   filterByStatus();
+  sortAlphabetically();
 });
 
 function searchLinks() {
@@ -32,3 +33,8 @@ function filterByStatus() {
     $(".link-read-false").show();
   });
 };
+
+function sortAlphabetically() {
+  $("#links").tablesorter();
+};
+

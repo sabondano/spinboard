@@ -14,7 +14,8 @@
   <%= label_tag :q, :search, class: "control-label" %>
   <%= text_field_tag :q, "", class: "form-control" %>
 
-  <table id="links">
+  <table id="links" class="tablesorter-blue">
+    <thead>
     <tr>
       <th>Title</th>
       <th>URL</th>
@@ -22,6 +23,8 @@
       <th></th>
       <th></th>
     </tr>
+    </thead>
+    <tbody>
     <% @links.each do |link| %>
       <tr class="link link-read-<%= link.read %>">
         <td class="title read-<%= link.read %>"><%= link.title %></td>
@@ -42,6 +45,7 @@
 
       </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 
