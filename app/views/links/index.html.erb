@@ -8,12 +8,25 @@
       <th>Title</th>
       <th>URL</th>
       <th>Read</th>
+      <th></th>
     </tr>
     <% @links.each do |link| %>
       <tr>
-        <td><%= link.title %></td>
-        <td><a href="<%= link.url %>"><%= link.url %></td>
+        <td class="read-<%= link.read %>"><%= link.title %></td>
+        <td class="read-<%= link.read %>"><a href="<%= link.url %>"><%= link.url %></td>
         <td><%= link.read %></td>
+        <td>
+          <% if !link.read %> 
+                 <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: true}}), method: :patch do %>
+                 <%= submit_tag 'Mark as Read' %>
+               <% end %>
+             <% else %>
+                 <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: false}}), method: :patch do %>
+                 <%= submit_tag 'Mark as Unread' %>
+               <% end %>
+           <% end %>
+        </td>
+
       </tr>
     <% end %>
   </table>
@@ -23,7 +36,7 @@
 <%= form_for(@link) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
-  
+
   <%= f.label :url %>
   <%= f.text_field :url %>
 
