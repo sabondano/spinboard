@@ -1,0 +1,32 @@
+<h1>Welcome to Spinboard</h1>
+<h2>All Links</h2>
+<% if @links.empty? %>
+  <p>You haven't submitted any links yet.</p>
+<% else %>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>URL</th>
+      <th>Read</th>
+    </tr>
+    <% @links.each do |link| %>
+      <tr>
+        <td><%= link.title %></td>
+        <td><a href="<%= link.url %>"><%= link.url %></td>
+        <td><%= link.read %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h2>Submit New Link</h1>
+<%= form_for(@link) do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+
+  <%= f.submit %>
+<% end %>
+
