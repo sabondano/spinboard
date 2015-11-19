@@ -8,8 +8,8 @@ class RecommendationsController < ApplicationController
     to_email = params[:to_email]
 
     unless to_email.nil?
-      email_data = { to_email: params[:to_email], link: params[:link] }
-      LinkRecommender.send_recommendation_email(email_data)
+      email_data = { to_email: params[:to_email], link: link.url }
+      LinkRecommender.send_recommendation_email(email_data).deliver
       flash.keep[:danger] = 'Your recommendation was sent.'
       redirect_to links_path
     else
