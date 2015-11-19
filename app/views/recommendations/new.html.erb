@@ -1,0 +1,8 @@
+<h1>Share Link</h1>
+<p>Link to share: <%= @link.title %> (<a href="<%= @link.url %>"><%= @link.url %></a>)</p>
+
+<%= form_tag recommendations_path({ id: @link.id }), method: :post do %>
+  <%= label_tag :to_email, "Send to (email):" %>
+  <%= text_field_tag :to_email %> 
+  <%= submit_tag 'Share' %>
+<% end %>

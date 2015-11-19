@@ -20,8 +20,9 @@
       <th>Title</th>
       <th>URL</th>
       <th>Read</th>
-      <th></th>
-      <th></th>
+      <th>Change Status</th>
+      <th>Edit Link</th>
+      <th>Recommend Link</th>
     </tr>
     </thead>
     <tbody>
@@ -42,6 +43,7 @@
           <% end %>
         </td>
         <td><%= link_to 'edit', edit_link_path(link.id) %></td>
+        <td><%= link_to 'recommend link', new_recommendation_path({id: link.id}) %>
 
       </tr>
     <% end %>
