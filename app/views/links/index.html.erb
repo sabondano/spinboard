@@ -35,24 +35,24 @@
           <% if !link.read %> 
 
             <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: true}}),
-              { class: 'btn-mark-as-read', method: :patch, remote: true } do %>
+              { class: 'btn-mark-as-read', method: :put, remote: true } do %>
             <%= submit_tag 'Mark as Read' %>
             <% end %>
 
             <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: false}}),
-              { class: "btn-mark-as-unread hidden", method: :patch, remote: true } do %>
+              { class: "btn-mark-as-unread hidden", method: :put, remote: true } do %>
               <%= submit_tag 'Mark as Unread' %>             
             <% end %>
 
           <% else %>
 
             <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: false}}),
-              { class: 'btn-mark-as-unread', method: :patch, remote: true } do %>
+              { class: 'btn-mark-as-unread', method: :put, remote: true } do %>
             <%= submit_tag 'Mark as Unread' %>
             <% end %>
 
             <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: true}}),
-              { class: "btn-mark-as-read hidden", method: :patch, method: true } do %>
+              { class: "btn-mark-as-read hidden", method: :put, remote: true } do %>
               <%= submit_tag 'Mark as Read' %>             
             <% end %>
 
