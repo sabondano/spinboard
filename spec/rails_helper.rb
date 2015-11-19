@@ -10,7 +10,14 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.infer_spec_type_from_file_location!
+
+  Capybara.javascript_driver = :webkit
+
+  Capybara::Webkit.configure do |config|
+    config.block_unknown_urls
+  end
+
 end

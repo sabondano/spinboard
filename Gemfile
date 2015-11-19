@@ -26,6 +26,7 @@ end
 
 group :test do
   gem 'simplecov', require: false
+  gem 'capybara-webkit'
 end
 
 gem 'rails_12factor', group: :production
