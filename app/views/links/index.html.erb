@@ -27,19 +27,36 @@
     </thead>
     <tbody>
     <% @links.each do |link| %>
-      <tr class="link link-read-<%= link.read %>">
+      <tr id="<%= link.id %>" class="link link-read-<%= link.read %>">
         <td class="title read-<%= link.read %>"><%= link.title %></td>
-        <td class="read-<%= link.read %>"><a href="<%= link.url %>"><%= link.url %></td>
-        <td><%= link.read %></td>
-        <td>
+        <td class="url read-<%= link.read %>"><a href="<%= link.url %>"><%= link.url %></td>
+        <td class="read-status"><%= link.read %></td>
+        <td class="change-status">
           <% if !link.read %> 
-            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: true}}), method: :patch do %>
-              <%= submit_tag 'Mark as Read' %>
+
+            <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: true}}),
+              { class: 'btn-mark-as-read', method: :patch, remote: true } do %>
+            <%= submit_tag 'Mark as Read' %>
             <% end %>
+
+            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: false}}),
+              {class: "btn-mark-as-unread hidden", method: :patch, remote: true } do %>
+              <%= submit_tag 'Mark as Unread' %>             
+            <% end %>
+
           <% else %>
-            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: false}}), method: :patch do %>
-              <%= submit_tag 'Mark as Unread' %>
+
+            <%= form_tag api_v1_link_path(link.id, {link: {title: link.title, url: link.url, read: false}}),
+              { class: 'btn-mark-as-unread', method: :patch, remote: true } do %>
+            <%= submit_tag 'Mark as Unread' %>
             <% end %>
+
+            <%= form_tag link_path(link.id, {link: {title: link.title, url: link.url, read: true}}),
+              {class: "btn-mark-as-read hidden", method: :patch, method: true } do %>
+              <%= submit_tag 'Mark as Read' %>             
+            <% end %>
+
+
           <% end %>
         </td>
         <td><%= link_to 'edit', edit_link_path(link.id) %></td>

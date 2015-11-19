@@ -15,6 +15,8 @@ gem 'bcrypt'
 
 gem 'jquery-tablesorter'
 
+gem 'responders'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
