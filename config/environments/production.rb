@@ -1,12 +1,12 @@
 Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
-  host = 'the-pivot.herokuapp.com'
+  host = 'limitless-coast-3206.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   config.action_mailer.smtp_settings = {
     address:              'smtp.sendgrid.net',
     port:                 587,
-    domain:               "the-pivot.herokuapp.com",
+    domain:               "limitless-coast-3206.herokuapp.com",
     user_name:            'sabondano',
     password:             'collectorsworld1',
     authentication:       'plain',
